@@ -5,6 +5,7 @@ import thoughtImage from '../../assets/thought.png'
 import { useState } from "react";
 import { FeedbackTypeStep } from "./Steps/FeedbackTypeStep";
 import { FeedbackContentStep } from "./Steps/FeedbackContentStep";
+import { FeedbackSuccesStep } from "./Steps/FeedbackSuccessStep";
 
 export const feedbackTypes={
     BUG: {
@@ -38,9 +39,11 @@ export type feedbackType = keyof typeof feedbackTypes
 
 export function WidgetForm(){
     const [feedbackType , setFeedbackType] = useState<feedbackType | null>(null)
+    const[feedbackSend,setFeedbackSend]=useState(false)
 
     function handleRestartFeddback(){
         setFeedbackType(null);
+        setFeedbackSend(false)
     }
 
     return(
@@ -50,13 +53,18 @@ export function WidgetForm(){
   flex-col items-center shadow-lg 
   w-[calc(100vw-2rem)] md:w-auto"
   >
-    {!feedbackType ? (
-      <FeedbackTypeStep typeFeedback={setFeedbackType}/>
-    )
-      : (
-        <FeedbackContentStep feedbackType={feedbackType} onFeedbackRestartRequested={handleRestartFeddback}/>
-      )
-  }
+     {feedbackSend ? (<FeedbackSuccesStep onFeedBackRestartRequest={handleRestartFeddback}/>):
+        ( <>
+            {!feedbackType ? (
+                <FeedbackTypeStep typeFeedback={setFeedbackType}/>):
+                 (<FeedbackContentStep 
+                    feedbackType={feedbackType} 
+                    onFeedbackRestartRequested={handleRestartFeddback}
+                    onFeedbackSend={()=>setFeedbackSend(true)}
+                />
+            )}
+        </>
+     )}
            <footer className="text-xs text-neutral-50">
                 feito com ❤️ por vivi.code
            </footer>
