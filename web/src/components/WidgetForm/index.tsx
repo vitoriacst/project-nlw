@@ -38,6 +38,11 @@ export type feedbackType = keyof typeof feedbackTypes
 
 export function WidgetForm(){
     const [feedbackType , setFeedbackType] = useState<feedbackType | null>(null)
+
+    function handleRestartFeddback(){
+        setFeedbackType(null);
+    }
+
     return(
         <div 
   className="bg-zinc-900 p-4
@@ -49,7 +54,7 @@ export function WidgetForm(){
       <FeedbackTypeStep typeFeedback={setFeedbackType}/>
     )
       : (
-        <FeedbackContentStep />
+        <FeedbackContentStep feedbackType={feedbackType} onFeedbackRestartRequested={handleRestartFeddback}/>
       )
   }
            <footer className="text-xs text-neutral-50">
