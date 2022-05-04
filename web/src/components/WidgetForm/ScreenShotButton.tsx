@@ -47,7 +47,6 @@ export function ScreenShotButton({
         >
             {
             isTakingScreenShot?<Loading/> :<Camera className="w-6 h-6 text-zinc-100"/>
-              
             }
         </button>
     )
