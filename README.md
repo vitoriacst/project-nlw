@@ -3,7 +3,7 @@
   projeto desenvolvido na semana Nlw da Rocketseat
 <br>
 
--> Tailwind 
+-Tailwind 
 <br>
 . headles
 <br>
